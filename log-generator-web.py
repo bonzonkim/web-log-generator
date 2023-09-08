@@ -6,6 +6,7 @@ import ipaddress
 def generate_random_ip():
     return str(ipaddress.IPv4Address(random.randint(0, 2**32 - 1)))
 
+#change this number to change the amount of log.
 num_entries = 200000
 
 http_methods = ["GET", "POST", "PUT", "DELETE"]
@@ -38,6 +39,7 @@ def generate_log_entry():
     session_id = random.choice(session_ids)
     request_id = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for _ in range(12))
     
+    # change this to change the log format.
     log_entry = (
         f"{timestamp} | {ip_address} | {http_method} {path} | {status} | {user_agent} | "
         f"User-Agent: {user_agent} | Referer: {referer} | X-Forwarded-For: {x_forwarded_for} | "
@@ -49,7 +51,7 @@ def generate_log_entry():
     
     return log_entry
 
-
+# change first parameter of open() to change the name of the log file.
 with open("generated_web_logs.log", "w") as file:
     for _ in range(num_entries):
        log_entry = generate_log_entry()
